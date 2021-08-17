@@ -253,7 +253,7 @@ li{margin:10px 0}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
 <div class="main">
 <?
-foreach ($iwdsVersions as $key => $version) {
+foreach (array_reverse($iwdsVersions) as $key => $version) {
 ?>
 <a href="?version=<?=$key?>"><?=$key?> - <?=$version['date']?></a><br>
 <?
