@@ -443,16 +443,16 @@ function printEntry($entry) {
 		$negative += count($disunified);
 	}
 	if (isset($entry->note)) {
-		echo '<div><b>Notes</b></div>';
-		echo '<div>'.html_safe($entry->note . '').'</div>'."\r\n";
+		echo '<p><b>Notes</b><br>';
+		echo html_safe($entry->note . '').'</p>'."\r\n";
 	}
 	if (isset($entry->ReviewSystem)) {
-		echo '<div><b>Discussion</b></div>';
-		echo '<div><a href="'.html_safe($entry->ReviewSystem . '').'" target=_blank>'.html_safe($entry->ReviewSystem . '').'</a></div>'."\r\n";
+		echo '<p><b>Discussion</b><br>';
+		echo '<a href="'.html_safe($entry->ReviewSystem . '').'" target=_blank>'.html_safe($entry->ReviewSystem . '').'</a></p>'."\r\n";
 	}
 	if (isset($entry->annexs)) {
-		echo '<div><b>Annex</b></div>';
-		echo '<div>'.html_safe($entry->annexs . '').'</div>'."\r\n";
+		echo '<p><b>Annex</b><br>';
+		echo html_safe($entry->annexs . '').'</p>'."\r\n";
 	}
 	
 	if ($positive > 0 || $negative > 0) {
