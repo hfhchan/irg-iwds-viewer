@@ -455,11 +455,15 @@ function printEntry($entry) {
 		echo '<div>'.html_safe($entry->annexs . '').'</div>'."\r\n";
 	}
 	
-	$rate = $positive / ($positive + $negative);
-	if ($rate > 0.8)
-		echo '<div><b>Success Rate</b>: ' . number_format( $rate * 100, 2). '</div>'."\r\n";
-	else
-		echo '<div><b>Success Rate</b>: <span style="color:red">' . number_format( $rate * 100, 2). '</span></div>'."\r\n";
+	if ($positive > 0 || $negative > 0) {
+		$rate = $positive / ($positive + $negative);
+		if ($rate > 0.8)
+			echo '<div><b>Success Rate</b>: ' . number_format( $rate * 100, 2). '</div>'."\r\n";
+		else
+			echo '<div><b>Success Rate</b>: <span style="color:red">' . number_format( $rate * 100, 2). '</span></div>'."\r\n";
+	} else {
+		echo '<div><b>Success Rate</b>: N/A</div>'."\r\n";
+	}
 	unset($entry->glyphs);
 	unset($entry->jis);
 	unset($entry->hydcd);
