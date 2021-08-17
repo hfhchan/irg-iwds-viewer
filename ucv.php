@@ -338,7 +338,7 @@ function displayList($list, $tag = 'div', $compat = false) {
 		}
 		echo "\t\t\t\t\t".'<'.$tag.'>';
 		echo nameToChar($char);
-		echo '<a href="https://zi.tools/zi/' . urlencode($char) . '" target=_blank><img src="http://en.glyphwiki.org/glyph/hkcs_m' . html_safe(substr($char, 1)) . '.svg" width=20 height=20 loading=lazy></a>';
+		echo '<a href="https://zi.tools/zi/' . urlencode(nameToChar($char)) . '" target=_blank><img src="http://en.glyphwiki.org/glyph/hkcs_m' . html_safe(substr($char, 1)) . '.svg" width=20 height=20 loading=lazy></a>';
 		echo ' U+' . strtoupper(substr($char,1));
 		if ($compat) {
 			echo ' = ';
