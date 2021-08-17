@@ -472,8 +472,11 @@ function printEntry($entry) {
 	unset($entry->components);
 	unset($entry->SourceCodeSeparation);
 	unset($entry->disunified);
+	unset($entry->note);
 	unset($entry->ReviewSystem);
+	unset($entry->annexs);
 	if (count($entry)) {
+		echo '<div><b>Additional Attributes:</b></div>';
 		echo '<pre>';
 		var_dump($entry);
 		echo '</pre>'."\r\n";
