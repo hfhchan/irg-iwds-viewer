@@ -319,10 +319,10 @@ function parseGroupSimp($group, $id, $id2 = '') {
 		$glyphs = explode(',', $entry->glyphs);
 		foreach ($glyphs as $glyph) {
 			if (strpos($glyph, 'u2ff') === 0 || true) {
-				echo '<img src="https://cdn.jsdelivr.net/gh/kawabata/iwds@master/glyphs/'.html_safe($glyph).'.png" width=50 height=50 class=glyph title="'.html_safe($glyph).'" loading=lazy>';
+				echo '<img src="https://cdn.jsdelivr.net/gh/yi-bai/iwds@master/glyphs/'.html_safe($glyph).'.png" width=50 height=50 class=glyph title="'.html_safe($glyph).'" loading=lazy>';
 				// echo '<img src="https://raw.githack.com/kawabata/iwds/master/glyphs/'.html_safe($glyph).'.png" width=50 height=50 class=glyph title="'.html_safe($glyph).'" loading=lazy>';
 			} else {
-				echo '<img src="https://cdn.jsdelivr.net/gh/kawabata/iwds@master/glyphs/'.html_safe($glyph).'.svg" width=50 height=50 class=glyph title="'.html_safe($glyph).'" loading=lazy>';
+				echo '<img src="https://cdn.jsdelivr.net/gh/yi-bai/iwds@master/glyphs/'.html_safe($glyph).'.svg" width=50 height=50 class=glyph title="'.html_safe($glyph).'" loading=lazy>';
 				// echo '<img src="https://raw.githack.com/kawabata/iwds/master/glyphs/'.html_safe($glyph).'.svg" width=50 height=50 class=glyph title="'.html_safe($glyph).'" loading=lazy>';
 			}
 		}
