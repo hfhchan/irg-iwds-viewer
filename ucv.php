@@ -176,16 +176,21 @@ $iwdsVersions = [
 		'url' => 'https://raw.githubusercontent.com/kawabata/iwds/abf0a971e9112a50f55d225c073608e4b89fd17d/iwds.xml',
 		'sha1' => '29e5548430f97de68297abcb482af1a951a78246'
 	],
+	'IRGN2476' => [
+		'date' => '2021.06.11',
+		'url' => 'https://raw.githubusercontent.com/yi-bai/iwds/d5cf2b48a55b9f15adca0e0267dfe3633841dc70/iwds.xml',
+		'sha1' => '1d2ff27b9937874459c0f0777fac7f262062237c'
+	],
 ];
 
-$json = getURL('https://api.github.com/repos/kawabata/iwds/contents/iwds.xml');
+$json = getURL('https://api.github.com/repos/yi-bai/iwds/contents/iwds.xml');
 $data = json_decode($json);
 $sha = $data->sha;
 $checksums = array_map(function($entry) { return $entry['sha1']; }, $iwdsVersions);
 if (!in_array($sha, $checksums)) {
 	$iwdsVersions[$data->sha] = [
 		'date' => 'New',
-		'url' => 'https://raw.githubusercontent.com/kawabata/iwds/master/iwds.xml'
+		'url' => 'https://raw.githubusercontent.com/yi-bai/iwds/master/iwds.xml'
 	];
 }
 
