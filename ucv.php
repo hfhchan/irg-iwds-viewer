@@ -458,11 +458,11 @@ function printEntry($entry) {
 	if ($positive > 0 || $negative > 0) {
 		$rate = $positive / ($positive + $negative);
 		if ($rate > 0.8)
-			echo '<div><b>Success Rate</b>: ' . number_format( $rate * 100, 2). '</div>'."\r\n";
+			echo '<p><b>Rule Application Rate</b>: ' . number_format( $rate * 100, 2). '</p>'."\r\n";
 		else
-			echo '<div><b>Success Rate</b>: <span style="color:red">' . number_format( $rate * 100, 2). '</span></div>'."\r\n";
+			echo '<p><b>Rule Application Rate</b>: <span style="color:red">' . number_format( $rate * 100, 2). '</span></p>'."\r\n";
 	} else {
-		echo '<div><b>Success Rate</b>: N/A</div>'."\r\n";
+		echo '<p><b>Rule Application Rate</b>: N/A</p>'."\r\n";
 	}
 	unset($entry->glyphs);
 	unset($entry->jis);
