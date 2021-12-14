@@ -181,6 +181,11 @@ $iwdsVersions = [
 		'url' => 'https://raw.githubusercontent.com/yi-bai/iwds/d5cf2b48a55b9f15adca0e0267dfe3633841dc70/iwds.xml',
 		'sha1' => '1d2ff27b9937874459c0f0777fac7f262062237c'
 	],
+	'IRGN2514' => [
+		'date' => '2021.09.30',
+		'url' => 'https://raw.githubusercontent.com/yi-bai/iwds/43fd9ba0339b6690a981b9f4788f6f8cd67f04eb/iwds.xml',
+		'sha1' => '6d773807624706d02cf32dd625f0bc4e62a11f64'
+	],
 ];
 
 $json = getURL('https://api.github.com/repos/yi-bai/iwds/contents/iwds.xml');
