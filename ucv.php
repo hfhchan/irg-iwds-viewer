@@ -239,8 +239,8 @@ img{background:#fff}
 .toc-group a:hover{background:#eee}
 .toc-group img{width:40px;height:40px}
 .glyph{border:1px solid #ccc}
-.supercjk{zoom:0.1;max-width:100%;width:10px}
-.ucs-2017{zoom:0.1667;max-width:100%;width:10px}
+.supercjk{max-width:100%}
+.ucs-2017{max-width:100%}
 .disunified{table-layout:fixed}
 ul{margin:10px 10px 10px 30px;padding:0}
 li{margin:10px 0}
@@ -352,13 +352,13 @@ function displayList($list, $tag = 'div', $compat = false) {
 		}
 		echo '<br>';
 		if (isset($list[$i + 1]) && $list[$i + 1] === '$') {
-			echo '<img src="https://raw.githack.com/kawabata/iwds/master/ucs2014/'.html_safe(sprintf('%05s',strtoupper(substr($char,1)))).'.png" class=ucs-2017 loading=lazy>';
+			echo '<img srcset="https://raw.githack.com/kawabata/iwds/master/ucs2014/'.html_safe(sprintf('%05s',strtoupper(substr($char,1)))).'.png 5x" class=ucs-2017 loading=lazy>';
 		} else if (isset($list[$i + 1]) && $list[$i + 1] === '*') {
 			echo '<img src="https://raw.githack.com/kawabata/iwds/master/ucs2003/'.html_safe(sprintf('%05s',strtoupper(substr($char,1)))).'.png" class=ucs-2013 loading=lazy>';
 		} else if (isset($list[$i + 1]) && $list[$i + 1] === '#') {
-			echo '<img src="https://raw.githack.com/kawabata/iwds/master/supercjk/'.html_safe(sprintf('%05s',strtoupper(substr($char,1)))).'.png" class=supercjk loading=lazy>';
+			echo '<img srcset="https://raw.githack.com/kawabata/iwds/master/supercjk/'.html_safe(sprintf('%05s',strtoupper(substr($char,1)))).'.png 8x" class=supercjk loading=lazy>';
 		} else {
-			echo '<img src="https://raw.githack.com/kawabata/iwds/master/ucs2017/'.html_safe(sprintf('%05s',strtoupper(substr($char,1)))).'.png" class=ucs-2017 loading=lazy>';
+			echo '<img srcset="https://raw.githack.com/kawabata/iwds/master/ucs2017/'.html_safe(sprintf('%05s',strtoupper(substr($char,1)))).'.png 5x" class=ucs-2017 loading=lazy>';
 		}
 		echo '</'.$tag.'>'."\r\n";
 		
@@ -526,11 +526,3 @@ foreach ($iwds->group as $section) {
 
 ?>
 </div>
-<script>
-$('img.supercjk').on('load', function() {
-	if (this.naturalWidth) $(this).width(this.naturalWidth * 0.1).css('zoom', 1);
-}).trigger('load.dynamic');
-$('img.ucs-2017').on('load', function() {
-	if (this.naturalWidth) $(this).width(this.naturalWidth * 0.1667).css('zoom', 1);
-}).trigger('load.dynamic');
-</script>
