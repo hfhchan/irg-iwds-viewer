@@ -239,6 +239,8 @@ img{background:#fff}
 .toc-group a:hover{background:#eee}
 .toc-group img{width:40px;height:40px}
 .glyph{border:1px solid #ccc}
+
+h3{font-size:18px;margin:10px 0 4px}
 .supercjk{max-width:100%}
 .ucs-2017{max-width:100%}
 .disunified{table-layout:fixed}
@@ -387,41 +389,39 @@ function printEntry($entry) {
 		echo '<div>'.html_safe($entry->components . '').'</div>'."\r\n";
 	}
 	if (isset($entry->jis)) {
-		echo '<div><b>JIS</b><br>';
+		echo '<h3>JIS</h3>' . "\r\n";
 		array_map(function($jis) {
-			echo '<img src="https://raw.githack.com/kawabata/iwds/master/fig/jis.'.html_safe($jis . '').'.gif" loading=lazy>';
+			echo '<div><img src="https://raw.githack.com/kawabata/iwds/master/fig/jis.'.html_safe($jis . '').'.gif" loading=lazy></div>';
 		}, explode(',',$entry->jis));
-		echo '</div>'."\r\n";
+		echo "\r\n";
 	}
 	if (isset($entry->hydcd)) {
-		echo '<div><b>HYDCD</b><br><img src="https://raw.githack.com/kawabata/iwds/master/fig/xinjiu'.html_safe($entry->hydcd . '').'.png"></div>'."\r\n";
+		echo '<h3>HYDCD</h3><div><img src="https://raw.githack.com/kawabata/iwds/master/fig/xinjiu'.html_safe($entry->hydcd . '').'.png"></div>'."\r\n";
 	}
 
 	if (isset($entry->unified)) {
 		$unified = html_esc($entry->unified . '');
-		echo "\t\t\t\t<div>\r\n";
-		echo "\t\t\t\t\t";
 		if (isset($unified[count($unified) - 1]) && $unified[count($unified) - 1] === 'u2026') {
 			array_pop($unified);
-			echo '<b>Unified Ideographs (Examples)</b>';
+			echo '<h3>Unified Ideographs (Examples)</h3>' . "\r\n";
 		} else {
-			echo '<b>Unified Ideographs</b>';
+			echo '<h3>Unified Ideographs</h3>' . "\r\n";
 		}
-		echo '<br>'."\r\n";
+		echo "<div>\r\n";
 		displayList($unified);
-		echo "\t\t\t\t</div>\r\n";
+		echo "</div>\r\n";
 		$positive += count($unified);
 	}
 
 	if (isset($entry->compatibles)) {
-		echo '<div><b>Compatibility Ideographs</b></div>'."\r\n";
+		echo '<h3>Compatibility Ideographs</h3>' . "\r\n";
 		$compatibles = html_esc($entry->compatibles . '');
 		displayList($compatibles, 'div', true);
 		$positive += count($compatibles);
 	}
 
 	if (isset($entry->SourceCodeSeparation)) {
-		echo '<div><b>Source Code Separations</b></div>'."\r\n";
+		echo '<h3>Source Code Separations</h3>' . "\r\n";
 		echo '<table class=disunified>';
 		$scs = explode(',',$entry->SourceCodeSeparation . '');
 		foreach ($scs as $pair) {
@@ -435,7 +435,7 @@ function printEntry($entry) {
 	}
 
 	if (isset($entry->disunified)) {
-		echo '<div><b>Disunified Ideographs</b></div>'."\r\n";
+		echo '<h3>Disunified Ideographs</h3>' . "\r\n";
 		echo '<table class=disunified>'."\r\n";
 		$disunified = explode(',',$entry->disunified . '');
 		foreach ($disunified as $pair) {
@@ -447,17 +447,21 @@ function printEntry($entry) {
 		echo '</table>'."\r\n";
 		$negative += count($disunified);
 	}
+
 	if (isset($entry->note)) {
-		echo '<p><b>Notes</b><br>';
-		echo html_safe($entry->note . '').'</p>'."\r\n";
+		echo '<h3>Notes</h3>' . "\r\n";
+		echo '<p>' . html_safe($entry->note . '') . '</p>' . "\r\n";
 	}
+
 	if (isset($entry->ReviewSystem)) {
-		echo '<p><b>Discussion</b><br>';
-		echo '<a href="'.html_safe($entry->ReviewSystem . '').'" target=_blank>'.html_safe($entry->ReviewSystem . '').'</a></p>'."\r\n";
+		echo '<h3>Discussion</h3>' . "\r\n";
+		$link = $entry->ReviewSystem . '';
+		echo '<p><a href="' . html_safe($link) . '" target=_blank>' . html_safe($link) . '</a></p>' . "\r\n";
 	}
+
 	if (isset($entry->annexs)) {
-		echo '<p><b>Annex</b><br>';
-		echo html_safe($entry->annexs . '').'</p>'."\r\n";
+		echo '<h3>Annex</h3>' . "\r\n";
+		echo '<p>' . html_safe($entry->annexs . '') . '</p>' . "\r\n";
 	}
 	
 	if ($positive > 0 || $negative > 0) {
