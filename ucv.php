@@ -241,6 +241,7 @@ img{background:#fff}
 .glyph{border:1px solid #ccc}
 
 h3{font-size:18px;margin:10px 0 4px}
+.small-char{vertical-align:text-bottom}
 .supercjk{max-width:100%}
 .ucs-2017{max-width:100%}
 .disunified{table-layout:fixed}
@@ -345,7 +346,7 @@ function displayList($list, $tag = 'div', $compat = false) {
 		}
 		echo "\t\t\t\t\t".'<'.$tag.'>';
 		echo nameToChar($char);
-		echo '<a href="https://zi.tools/zi/' . urlencode(nameToChar($char)) . '" target=_blank><img src="http://en.glyphwiki.org/glyph/hkcs_m' . html_safe(substr($char, 1)) . '.svg" width=20 height=20 loading=lazy></a>';
+		echo '<a href="https://zi.tools/zi/' . urlencode(nameToChar($char)) . '" target=_blank><img src="http://en.glyphwiki.org/glyph/hkcs_m' . html_safe(substr($char, 1)) . '.svg" width=20 height=20 class=small-char loading=lazy></a>';
 		echo ' U+' . strtoupper(substr($char,1));
 		if ($compat) {
 			echo ' = ';
