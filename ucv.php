@@ -339,7 +339,7 @@ function parseGroupSimp($group, $id, $id2 = '') {
 	echo '</div>'."\r\n";
 }
 
-function displayList($list, $tag = 'div', $compat = false) {
+function displayList($list, $tag = 'div', $compat = false, $replaceImage = false) {
 	foreach ($list as $i => $char) {
 		if ($char === '*' || $char === '#' || $char === '$') {
 			continue;
@@ -354,7 +354,13 @@ function displayList($list, $tag = 'div', $compat = false) {
 			echo ' U+' . strtoupper(substr(toCompat($char),1));
 		}
 		echo '<br>';
-		if (isset($list[$i + 1]) && $list[$i + 1] === '$') {
+		if ($replaceImage) {
+			$paddedUSV = sprintf('%05s',strtoupper(substr($char,1)));
+			$folder = ltrim(substr($paddedUSV, 0, 3), '0');
+			$usv = ltrim($paddedUSV, '0');
+			$imageSrc = 'https://hc.jsecs.org/Code%20Charts/UCSv13/Excerpt/'.$folder.'/U+'.$usv.'.png';
+			echo '<img srcset="'.html_safe($imageSrc).' 1.2x" loading=lazy>';
+		} else if (isset($list[$i + 1]) && $list[$i + 1] === '$') {
 			echo '<img srcset="https://raw.githack.com/kawabata/iwds/master/ucs2014/'.html_safe(sprintf('%05s',strtoupper(substr($char,1)))).'.png 5x" class=ucs-2017 loading=lazy>';
 		} else if (isset($list[$i + 1]) && $list[$i + 1] === '*') {
 			echo '<img src="https://raw.githack.com/kawabata/iwds/master/ucs2003/'.html_safe(sprintf('%05s',strtoupper(substr($char,1)))).'.png" class=ucs-2013 loading=lazy>';
@@ -449,6 +455,23 @@ function printEntry($entry) {
 		$negative += count($disunified);
 	}
 
+	if (isset($entry->single)) {
+		echo '<h3>Single</h3>'."\r\n";
+		echo "<table class=single><tr>\r\n";
+		foreach ($entry->single as $tag) {
+			echo "<th>" . $tag->attributes()->char . "</th>\r\n";
+		}
+		echo "</tr><tr>\r\n";
+		foreach ($entry->single as $tag) {
+			echo "<td>\r\n";
+			$single = html_esc($tag . '');
+			displayList($single, 'div', false, true);
+			echo "</td>\r\n";
+			$negative += count($single);
+		}
+		echo "</tr></table>\r\n";
+	}
+
 	if (isset($entry->note)) {
 		echo '<h3>Notes</h3>' . "\r\n";
 		echo '<p>' . html_safe($entry->note . '') . '</p>' . "\r\n";
@@ -482,6 +505,7 @@ function printEntry($entry) {
 	unset($entry->components);
 	unset($entry->SourceCodeSeparation);
 	unset($entry->disunified);
+	unset($entry->single);
 	unset($entry->note);
 	unset($entry->ReviewSystem);
 	unset($entry->annexs);
