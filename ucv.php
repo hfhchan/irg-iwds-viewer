@@ -186,6 +186,11 @@ $iwdsVersions = [
 		'url' => 'https://raw.githubusercontent.com/yi-bai/iwds/43fd9ba0339b6690a981b9f4788f6f8cd67f04eb/iwds.xml',
 		'sha1' => '6d773807624706d02cf32dd625f0bc4e62a11f64'
 	],
+	'IRGN2548' => [
+		'date' => '2022.04.06',
+		'url' => 'https://raw.githubusercontent.com/yi-bai/iwds/f41954aa2fe7aff62f551ae05a594f670efefb3a/iwds.xml',
+		'sha1' => 'efacb09265d72453170a32e8d48fae6c399e7817'
+	],
 ];
 
 $json = getURL('https://api.github.com/repos/yi-bai/iwds/contents/iwds.xml');
@@ -260,6 +265,7 @@ li{margin:10px 0}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
 <div class="main">
+	<div>IWDS source: <a href="https://github.com/yi-bai/iwds" target=_blank>https://github.com/yi-bai/iwds</a></div>
 <?
 foreach (array_reverse($iwdsVersions) as $key => $version) {
 ?>
