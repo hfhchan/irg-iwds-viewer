@@ -263,7 +263,6 @@ li{margin:10px 0}
 
 .kind-not-unifiable::before{position:absolute;top:0;left:0;right:0;content:"";border-top:3px solid #f00}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
 <div class="main">
 	<div>IWDS source: <a href="https://github.com/yi-bai/iwds" target=_blank>https://github.com/yi-bai/iwds</a></div>
 <?
