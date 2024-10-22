@@ -210,13 +210,20 @@ $iwdsVersions = [
 
 $json = getURL('https://api.github.com/repos/yi-bai/iwds/contents/iwds.xml');
 $data = json_decode($json);
-$sha = $data->sha;
-$checksums = array_map(function($entry) { return $entry['sha1']; }, $iwdsVersions);
-if (!in_array($sha, $checksums)) {
-	$iwdsVersions[$data->sha] = [
-		'date' => 'New',
-		'url' => 'https://raw.githubusercontent.com/yi-bai/iwds/master/iwds.xml'
-	];
+
+$failed_to_check_new_version = false;
+if (isset($data->message) && strpos($data->message, 'API rate limit exceeded') !== false) {
+	$failed_to_check_new_version = true;
+} else {
+	$failed_to_check_new_version = false;
+	$sha = $data->sha;
+	$checksums = array_map(function($entry) { return $entry['sha1']; }, $iwdsVersions);
+	if (!in_array($sha, $checksums)) {
+		$iwdsVersions[$data->sha] = [
+			'date' => 'New',
+			'url' => 'https://raw.githubusercontent.com/yi-bai/iwds/master/iwds.xml'
+		];
+	}
 }
 
 if (!function_exists('array_key_last')) {
@@ -280,6 +287,13 @@ li{margin:10px 0}
 </style>
 <div class="main">
 	<div>IWDS source: <a href="https://github.com/yi-bai/iwds" target=_blank>https://github.com/yi-bai/iwds</a></div>
+<?
+if ($failed_to_check_new_version) {
+?>
+	<div style="color:red;font-size:13px;margin:5px 0">(Failed to check for new versions)</div>
+<?
+}
+?>
 <?
 foreach (array_reverse($iwdsVersions) as $key => $version) {
 ?>
